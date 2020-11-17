@@ -15,12 +15,18 @@ public class Servidor {
 		{
 			System.out.println("servidor iniciado");
 			ServerSocket servidor = null;
+			//Instancia um novo serviço que utiliza a porta 12345  
 			servidor = new ServerSocket(12345);
+			//Aguarda o recebimento de uma conexão
 			Socket conexao = servidor.accept();
+			//Salva os datagramas recebidos
 			InputStream recebe = conexao.getInputStream();
+			//Armazena a conexão de saída
 			OutputStream resposta = conexao.getOutputStream();
+			//Cria os pacotes para envio da informação
 			DataOutputStream envia = new DataOutputStream(resposta);
 			valor = recebe.read();
+			//envia as informações processadas para o cliente
 			envia.write(fatorial(valor));
 			conexao.close();
 			servidor.close();
